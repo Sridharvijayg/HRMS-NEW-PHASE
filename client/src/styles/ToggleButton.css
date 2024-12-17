@@ -1,0 +1,58 @@
+/* Toggle button container */
+.toggle-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+  }
+  
+  /* Basic toggle button styling */
+  .toggle-text{
+    display: none;
+  }
+  .toggle-button {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 60px;
+    height: 28px;
+    border-radius: 25px;
+    background-color: #ccc;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: background-color 0.3s ease;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Styling for active state (when checked) */
+  .toggle-button.checked {
+    background-color: #4caf50; /* Green color when checked in */
+  }
+  
+  /* The indicator (circle) that moves */
+  .toggle-indicator {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+  }
+  
+  /* Move the indicator when checked in */
+  .toggle-indicator.active {
+    transform: translateX(30px); /* Move to the right */
+  }
+  
+  /* Styling for the text inside the button */
+  .toggle-text {
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    padding: 0 10px;
+  }
+  
