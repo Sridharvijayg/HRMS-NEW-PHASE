@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import {Routes,Route} from 'react-router-dom';
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Routes, Route } from "react-router-dom";
 import { MyContext } from "./context/MyContext";
 import LoginForm from "./components/Login/LoginForm";
 import ForgetPasswordForm from "./components/Login/ForgetPasswordForm";
@@ -23,10 +23,13 @@ import RaiseLeave from "./pages/LeavePage/RaiseLeae";
 import NotAvailable from "./components/NotAvailable";
 import Calender from "./pages/Calender/Calender";
 import EmployeeCalender from "./pages/Calender/EmployeeCalender";
+import Payroll from "./pages/Payroll/Payroll";
+import Holiday from "./pages/Holiday/Holiday";
+import Projects from "./pages/Projects/Projects";
+
 
 function App() {
-
-  const {login,isAdmin} = useContext(MyContext);
+  const { login, isAdmin } = useContext(MyContext);
 
   return (
     <div className="App">
@@ -35,25 +38,61 @@ function App() {
         <Route path="/login/reset" element={<ForgetPasswordForm />} />
         <Route path="/login/otp" element={<OTP />} />
         <Route path="/login/update-password" element={<UpdatePassword />} />
-        <Route path="/admin" element={isAdmin && login ?<AdminPanel/>:<LoginForm/>}/>
-        <Route path="/Employee" element={isAdmin?<Employee/>:<LoginForm/>}/>
-        <Route path="/Employee/Add" element={<AddEmployee/>}/>
-        <Route path="/Employee/:employeeId" element={<UpdateEmployee/>}/>
-        <Route path="/employee/view/:employeeId" element={<ViewEmployee/>}/>
-        <Route path="/Department" element={isAdmin && login?<Department/>:<LoginForm/>}/>
-        <Route path="/Department/Add" element={<AddDepartment/>}/>
-        <Route path="/Department/:id" element={<UpdateDepartment/>}/>
-        <Route path="/Leave" element={<Leave/>}/>
-        <Route path="/Leave/:leaveId" element={<LeaveStatus/>}/>
-        <Route path="/Attendance" element={<Attendance/>}/>
-        <Route path="/emp" element={login?<EmployeePanel/>:<LoginForm/>}/>
-        <Route path="/ELeave" element={login?<ELeave/>:<LoginForm/>}/>
-        <Route path="/raise-Leave" element={login?<RaiseLeave/>:<LoginForm/>}/>
-        <Route path="/calender" element={login?<Calender/>:<LoginForm/>}/>
-        <Route path="/employeecalender" element={login?<EmployeeCalender/>:<LoginForm/>}/>
-        <Route path="/not-available" element={login?<NotAvailable/>:<LoginForm/>}/>
+        <Route
+          path="/admin"
+          element={isAdmin && login ? <AdminPanel /> : <LoginForm />}
+        />
+        <Route
+          path="/Employee"
+          element={isAdmin ? <Employee /> : <LoginForm />}
+        />
+        <Route path="/Employee/Add" element={<AddEmployee />} />
+        <Route path="/Employee/:employeeId" element={<UpdateEmployee />} />
+        <Route path="/employee/view/:employeeId" element={<ViewEmployee />} />
+        <Route
+          path="/Department"
+          element={isAdmin && login ? <Department /> : <LoginForm />}
+        />
+        <Route path="/Department/Add" element={<AddDepartment />} />
+        <Route path="/Department/:id" element={<UpdateDepartment />} />
+        <Route path="/Leave" element={<Leave />} />
+        <Route path="/Leave/:leaveId" element={<LeaveStatus />} />
+        <Route path="/Attendance" element={<Attendance />} />
+        <Route
+          path="/emp"
+          element={login ? <EmployeePanel /> : <LoginForm />}
+        />
+        <Route path="/ELeave" element={login ? <ELeave /> : <LoginForm />} />
+        <Route
+          path="/raise-Leave"
+          element={login ? <RaiseLeave /> : <LoginForm />}
+        />
+        <Route
+          path="/calender"
+          element={login ? <Calender /> : <LoginForm />}
+        />
+        <Route
+          path="/holiday"
+          element={login ? <Holiday /> : <LoginForm />}
+        />
+        <Route
+          path="/employeecalender"
+          element={login ? <EmployeeCalender /> : <LoginForm />}
+        />
+
+        
+        <Route
+          path="/not-available"
+          element={login ? <NotAvailable /> : <LoginForm />}
+        />
+
+        <Route
+          path="/payroll"
+          element={ login ? <Payroll /> : <LoginForm />}
+        />
+        <Route path="/projects" element={<Projects />} />
+
       </Routes>
-      
     </div>
   );
 }

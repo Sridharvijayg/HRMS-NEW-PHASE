@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const DepartmentTable = ({ departments, handleDeleteDepartment }) => {
+const PayrollTable = ({ departments, handleDeleteDepartment }) => {
   const navigate = useNavigate();
 
   return (
@@ -9,8 +9,14 @@ const DepartmentTable = ({ departments, handleDeleteDepartment }) => {
       <thead className="thead-light">
         <tr>
           <th>S.No</th>
-          <th>Department</th>
-          <th>No.of Employees</th>
+          <th>Team</th>
+          <th>Employee id</th>
+          <th>Telegram id</th>
+          <th>Name</th>
+          <th>Salary</th>
+          <th>Email id</th>
+          <th>Mobile No</th>
+          <th>Status</th>
           <th>Action</th>
         </tr>
       </thead>
@@ -19,8 +25,15 @@ const DepartmentTable = ({ departments, handleDeleteDepartment }) => {
           departments.map((dep, index) => (
             <tr key={index}>
               <td>{index + 1}</td>
-              <td>{dep.department}</td>
-              <td>{dep.employeesCount}</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+
               <td>
                 <button
                   className="btn btn-sm btn-success me-3"
@@ -53,4 +66,4 @@ const DepartmentTable = ({ departments, handleDeleteDepartment }) => {
   );
 };
 
-export default DepartmentTable;
+export default PayrollTable;

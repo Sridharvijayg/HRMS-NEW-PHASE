@@ -1,0 +1,93 @@
+.pagination-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%; /* Full width for pagination */
+    padding: 20px;
+    position: relative; /* Necessary for absolute positioning */
+  }
+  
+  .ant-pagination {
+    flex-grow: 1; /* Ensures the numbers take up the available space */
+    display: flex;
+    justify-content: center; /* Centers the page numbers */
+    position: relative;
+  }
+  
+  .page-start {
+    position: absolute;
+    left: 0;
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Space between arrow and text */
+  }
+  
+  .page-end {
+    position: absolute;
+    right: 0;
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Space between text and arrow */
+  }
+
+  /* Styles for the horizontal line */
+.pagination-separator {
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 100px 0 0 0;
+}
+
+/* Ensures pagination is aligned at the bottom of the page */
+.pagination-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: auto;
+  padding: 10px 0;
+}
+
+  
+  /* Hide text for smaller screens */
+  @media (max-width: 768px) {
+    .page-start span, 
+    .page-end span {
+      display: none; /* Hide text on smaller screens */
+    }
+  
+    .page-start a, 
+    .page-end a {
+      gap: 3px; /* Reduced gap for mobile */
+    }
+  
+    .page-start a .anticon, 
+    .page-end a .anticon {
+      font-size: 16px; /* Adjust arrow size */
+    }
+  }
+  
+  /* Adjustments for mobile devices */
+  @media (max-width: 576px) {
+    .pagination-wrapper {
+      padding: 10px;
+    }
+  
+    .page-start,
+    .page-end {
+      font-size: 12px; /* Smaller text for mobile */
+      gap: 3px; /* Reduced gap for mobile */
+    }
+  
+    .ant-pagination-item {
+      margin: 0 2px;
+    }
+  
+    .ant-pagination-item a {
+      font-size: 12px; /* Adjust page number size */
+    }
+  
+    /* Reduce arrow size for mobile screens */
+    .page-start a .anticon, 
+    .page-end a .anticon {
+      font-size: 14px;
+    }
+  }
+  

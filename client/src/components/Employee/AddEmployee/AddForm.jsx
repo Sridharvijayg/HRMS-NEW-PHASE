@@ -1,28 +1,26 @@
-import React from 'react';
-import InputField from './InputField';
-import SelectField from './SelectField';
+import React from "react";
+import InputField from "./InputField";
+import SelectField from "./SelectField";
 
 const AddForm = ({ register, errors }) => {
-  
   const departmentOptions = [
-    { value: 'Design', label: 'Design' },
-    { value: 'Development', label: 'Development' },
-    { value: 'Testing', label: 'Testing' },
-    { value: 'Intern', label: 'Intern' },
+    { value: "Design", label: "Design" },
+    { value: "Development", label: "Development" },
+    { value: "Testing", label: "Testing" },
+    { value: "Intern", label: "Intern" },
   ];
 
   const designationOptions = [
-    { value: 'Software Developer', label: 'Software Developer' },
-    { value: 'Software Designer', label: 'Software Designer' },
-    { value: 'Tester', label: 'Tester' },
+    { value: "Software Developer", label: "Software Developer" },
+    { value: "Software Designer", label: "Software Designer" },
+    { value: "Tester", label: "Tester" },
   ];
 
   const genderOptions = [
-    { value: 'Male', label: 'Male' },
-    { value: 'Female', label: 'Female' },
-    { value: 'Others', label: 'Others' },
+    { value: "Male", label: "Male" },
+    { value: "Female", label: "Female" },
+    { value: "Others", label: "Others" },
   ];
-
 
   return (
     <>
@@ -33,7 +31,7 @@ const AddForm = ({ register, errors }) => {
         register={register}
         errors={errors}
         placeholder="Enter ID"
-        validation={{ required: 'Employee ID is required' }}
+        validation={{ required: "Employee ID is required" }}
       />
 
       {/* Name Field */}
@@ -43,9 +41,9 @@ const AddForm = ({ register, errors }) => {
         register={register}
         errors={errors}
         placeholder="Enter name"
-        validation={{ required: 'Name is required' }}
+        validation={{ required: "Name is required" }}
       />
-      
+
       {/* Name Field */}
       <InputField
         id="email"
@@ -54,9 +52,9 @@ const AddForm = ({ register, errors }) => {
         errors={errors}
         type="email"
         placeholder="Enter email"
-        validation={{ required: 'Email is required' }}
+        validation={{ required: "Email is required" }}
       />
-      
+
       {/* Dob Field */}
       <InputField
         id="dob"
@@ -65,9 +63,9 @@ const AddForm = ({ register, errors }) => {
         register={register}
         errors={errors}
         placeholder="Enter email"
-        validation={{ required: 'Email is required' }}
+        validation={{ required: "Email is required" }}
       />
-      
+
       {/* Designation Field */}
       <SelectField
         id="position"
@@ -75,7 +73,7 @@ const AddForm = ({ register, errors }) => {
         register={register}
         errors={errors}
         options={designationOptions}
-        validation={{ required: 'Designation is required' }}
+        validation={{ required: "Designation is required" }}
       />
 
       {/* Department Field */}
@@ -85,7 +83,7 @@ const AddForm = ({ register, errors }) => {
         register={register}
         errors={errors}
         options={departmentOptions}
-        validation={{ required: 'Department is required' }}
+        validation={{ required: "Department is required" }}
       />
 
       {/* Project Field */}
@@ -95,17 +93,17 @@ const AddForm = ({ register, errors }) => {
         register={register}
         errors={errors}
         options={genderOptions}
-        validation={{ required: 'Gender is required' }}
+        validation={{ required: "Gender is required" }}
       />
 
       {/* Contact Field */}
       <InputField
-      id="contact"
-      label="Contact"
-      register={register}
-      errors={errors}
-      placeholder="Enter Contact"
-      validation={{ required: 'Contact is required' }}
+        id="contact"
+        label="Contact"
+        register={register}
+        errors={errors}
+        placeholder="Enter Contact"
+        validation={{ required: "Contact is required" }}
       />
 
       {/* Address Field */}
@@ -115,9 +113,8 @@ const AddForm = ({ register, errors }) => {
         register={register}
         errors={errors}
         placeholder="Enter Address"
-        validation={{ required: 'Address is required' }}
+        validation={{ required: "Address is required" }}
       />
-
     </>
   );
 };

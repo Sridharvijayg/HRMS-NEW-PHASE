@@ -15,12 +15,13 @@
             <span className='fw-bold fs-4 text-secondary nav-title'></span>
           </div>
           <div className='icons'>
+          <div className="icon-container">
+                <FaRegBell className='profile-icon'/>
+            </div>
             <div className="img-container">
                 <img src={employee.profilePictureUrl?employee.profilePictureUrl:logo} alt="logo" />
             </div>
-            <div className="icon-container">
-                <FaRegBell className='profile-icon'/>
-            </div>
+            
           </div>
       </nav>
     )

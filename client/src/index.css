@@ -28,12 +28,14 @@
 .Grid-box {
   width: 100%;
   height: 100vh;
-  display: grid;
-  grid-template-areas: 'aside nav nav nav'
-    'aside main main main';
-  grid-template-columns: 300px 1fr 1fr 1fr;
-  grid-template-rows: 80px 1fr;
-  }
+  display: grid
+;
+  grid-template-areas:
+      'aside nav nav nav'
+      'aside main main main';
+  grid-template-columns: 240px 1fr 1fr 1fr;
+  grid-template-rows: 60px 1fr;
+}
 
 main {
   grid-area: main;

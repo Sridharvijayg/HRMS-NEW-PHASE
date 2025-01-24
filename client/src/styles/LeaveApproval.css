@@ -1,0 +1,50 @@
+.custom-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Transparent black background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.custom-modal {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 500px;
+}
+
+.modal-body {
+  margin-top: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  /* margin-bottom: 15px; */
+}
+
+.form-label {
+  width: 150px;
+  font-weight: bold;
+  margin-right: 10px; /* Adds space between label and input */
+}
+
+.form-input {
+  flex: 1; /* Makes the input field take up remaining space */
+  padding: 8px;
+  font-size: 14px;
+}
+
+.modal-actions .btn {
+  margin: 0 10px;
+}

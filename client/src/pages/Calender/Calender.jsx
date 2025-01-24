@@ -1,3 +1,5 @@
+
+
 import React, { useContext, useState, useEffect } from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import { IoAddCircleOutline } from "react-icons/io5";
@@ -6,15 +8,21 @@ import "../../styles/calender.css";
 import Nav from "../../components/Nav";
 import Loading from "../../components/Loading";
 import SideNav from "../../components/SideNav";
+import Department from "../Department/Department"; 
 import { MyContext } from "../../context/MyContext";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
+import { Link } from "react-router-dom";
+import Holiday from "../Holiday/Holiday";
 
 // Setup localizer using moment
 const localizer = momentLocalizer(moment);
 
-const Calender = () => {
+const CalenderAndHolidayPage = () => {
   const { isOpen, isLoading } = useContext(MyContext);
+  const [activeView, setActiveView] = useState("calendar"); 
+
+  // Event state and other Calendar logic (as before)
   const [events, setEvents] = useState([]);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [showModal, setShowModal] = useState(false);
@@ -25,7 +33,6 @@ const Calender = () => {
     description: "",
   });
 
-  // Fetch events from the API on component mount
   useEffect(() => {
     fetchEvents();
   }, []);
@@ -50,7 +57,7 @@ const Calender = () => {
     setSelectedEvent(event);
     setFormValues({
       title: event.title,
-      startDate: event.start.toISOString().slice(0, 16), // YYYY-MM-DDTHH:mm
+      startDate: event.start.toISOString().slice(0, 16),
       endDate: event.end.toISOString().slice(0, 16),
       description: event.description,
     });
@@ -59,40 +66,22 @@ const Calender = () => {
 
   // Handle selecting a slot (add new event)
   const handleSelectSlot = ({ start, end }) => {
-    setSelectedEvent(null); // Clear any selected event
+    setSelectedEvent(null);
     setFormValues({
       title: "",
-      startDate: start.toISOString().slice(0, 16), // Default to selected start time
+      startDate: start.toISOString().slice(0, 16),
       endDate: end.toISOString().slice(0, 16),
       description: "",
     });
     setShowModal(true);
   };
 
-  // Handle form input change
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormValues((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
-
   // Handle form submission (add or update)
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Destructure form values
     const { title, startDate, endDate, description } = formValues;
-
-    // Ensure startDate and endDate are valid and startDate is before endDate
     const start = new Date(startDate);
     const end = new Date(endDate);
-
-    // if (start >= end) {
-    //   alert("End date must be after start date.");
-    //   return;
-    // }
 
     const newEvent = {
       title,
@@ -102,7 +91,6 @@ const Calender = () => {
     };
 
     try {
-      // If the event is selected (edit), perform PUT request to update
       if (selectedEvent) {
         const response = await fetch(
           `http://localhost:5000/api/calendar/events/${selectedEvent._id}`,
@@ -114,11 +102,8 @@ const Calender = () => {
             body: JSON.stringify(newEvent),
           }
         );
-        if (!response.ok) {
-          throw new Error("Failed to update event");
-        }
+        if (!response.ok) throw new Error("Failed to update event");
       } else {
-        // Otherwise, create a new event with POST request
         const response = await fetch("http://localhost:5000/api/calendar/add", {
           method: "POST",
           headers: {
@@ -126,13 +111,10 @@ const Calender = () => {
           },
           body: JSON.stringify(newEvent),
         });
-        if (!response.ok) {
-          throw new Error("Failed to create event");
-        }
+        if (!response.ok) throw new Error("Failed to create event");
       }
-
-      fetchEvents(); // Refresh event list
-      setShowModal(false); // Close the modal
+      fetchEvents();
+      setShowModal(false);
     } catch (error) {
       console.error("Error saving event:", error);
       alert("There was an error saving the event. Please try again.");
@@ -142,20 +124,14 @@ const Calender = () => {
   // Handle deleting an event
   const handleDelete = async () => {
     if (!selectedEvent) return;
-
     try {
       const response = await fetch(
         `http://localhost:5000/api/calendar/events/${selectedEvent._id}`,
-        {
-          method: "DELETE",
-        }
+        { method: "DELETE" }
       );
-      if (!response.ok) {
-        throw new Error("Failed to delete event");
-      }
-
-      fetchEvents(); // Refresh event list
-      setShowModal(false); // Close the modal
+      if (!response.ok) throw new Error("Failed to delete event");
+      fetchEvents();
+      setShowModal(false);
     } catch (error) {
       console.error("Error deleting event:", error);
     }
@@ -168,22 +144,30 @@ const Calender = () => {
       <SideNav />
       <main id="Employee">
         <div className={isOpen ? "main-header active" : "main-header"}>
-          <h3 className="fw-bold">Calendar</h3>
+          {/* <h3 className="fw-bold">Calendar and Holiday</h3> */}
           <div className="right-box">
-            <button onClick={() => setShowModal(true)}><IoAddCircleOutline className="add-icon" /> Add New Event</button>
+            <button onClick={() => setActiveView("calendar")}>Calendar</button>
+            <button onClick={() => setActiveView("holiday")}>Holiday</button>
           </div>
         </div>
-        <div className="full-calender">
-          <Calendar
-            localizer={localizer}
-            events={events}
-            startAccessor="start"
-            endAccessor="end"
-            style={{ height: 500, width: "100%" }}
-            onSelectEvent={handleSelectEvent}
-            onSelectSlot={handleSelectSlot}
-            selectable
-          />
+
+        <div className="content">
+          {activeView === "calendar" && (
+            <div className="full-calender">
+              <Calendar
+                localizer={localizer}
+                events={events}
+                startAccessor="start"
+                endAccessor="end"
+                style={{ height: "500px", width: "100%" ,border:"5px solid black",padding:"20px"}}
+                onSelectEvent={handleSelectEvent}
+                onSelectSlot={handleSelectSlot}
+                selectable
+              />
+            </div>
+          )}
+          {activeView === "holiday" && <Holiday />}{" "}
+          {/* Render Holiday (Department) component */}
         </div>
       </main>
 
@@ -199,7 +183,9 @@ const Calender = () => {
                   type="text"
                   name="title"
                   value={formValues.title}
-                  onChange={handleInputChange}
+                  onChange={(e) =>
+                    setFormValues({ ...formValues, title: e.target.value })
+                  }
                   required
                 />
               </div>
@@ -209,7 +195,9 @@ const Calender = () => {
                   type="datetime-local"
                   name="startDate"
                   value={formValues.startDate}
-                  onChange={handleInputChange}
+                  onChange={(e) =>
+                    setFormValues({ ...formValues, startDate: e.target.value })
+                  }
                   required
                 />
               </div>
@@ -219,7 +207,9 @@ const Calender = () => {
                   type="datetime-local"
                   name="endDate"
                   value={formValues.endDate}
-                  onChange={handleInputChange}
+                  onChange={(e) =>
+                    setFormValues({ ...formValues, endDate: e.target.value })
+                  }
                   required
                 />
               </div>
@@ -228,7 +218,12 @@ const Calender = () => {
                 <textarea
                   name="description"
                   value={formValues.description}
-                  onChange={handleInputChange}
+                  onChange={(e) =>
+                    setFormValues({
+                      ...formValues,
+                      description: e.target.value,
+                    })
+                  }
                   required
                 />
               </div>
@@ -251,4 +246,4 @@ const Calender = () => {
   );
 };
 
-export default Calender;
+export default CalenderAndHolidayPage;
